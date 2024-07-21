@@ -24,7 +24,7 @@ export default class Deck {
 
     reshuffleDeck() {
         this.discardPile.forEach(card => {
-            if (card.inthis.deck) {
+            if (card.inStartingDeck) {
                 this.deck.push(card);
             }
         });

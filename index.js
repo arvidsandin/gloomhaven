@@ -23,7 +23,6 @@ addEventListener("DOMContentLoaded", (event) => {
     document.getElementById('blessButton').addEventListener("click", e => {
         deck.addCard('x2');
         blessCounter.innerText = deck.countBlesses();
-        console.log(deck)
     });
     document.getElementById('curseButton').addEventListener("click", e => {
         deck.addCard('∅');
@@ -54,4 +53,6 @@ function reshuffle(){
     reminder.innerText = '';
     blessCounter.innerText = deck.countBlesses();
     curseCounter.innerText = deck.countCurses();
+    currentCard = null;
+    previousCard = null;
 }
