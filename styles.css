@@ -1,0 +1,14 @@
+.divs{
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.divs:hover{
+    cursor: pointer;
+}
