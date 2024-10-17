@@ -1,6 +1,5 @@
 import Deck from "./deck.js";
-
-let deck = new Deck();
+let deck = new Deck(JSON.parse(localStorage.getItem('deck')));
 let currentCard = null;
 let previousCard = null;
 let theDiv;
@@ -8,7 +7,7 @@ let secondDiv;
 let reminder;
 let blessCounter;
 let curseCounter;
-addEventListener("DOMContentLoaded", (event) => { 
+addEventListener("DOMContentLoaded", (event) => {
     theDiv = document.getElementById('theDiv');
     secondDiv = document.getElementById('secondDiv');
     reminder = document.getElementById('reminder');
@@ -28,21 +27,31 @@ addEventListener("DOMContentLoaded", (event) => {
         deck.addCard('∅');
         curseCounter.innerText = deck.countCurses();
     });
+    currentCard = deck.discardPile[deck.discardPile.length - 1];
+    previousCard = deck.discardPile[deck.discardPile.length - 2];
+    updateTexts();
 });
 
 function drawNewCard() {
     previousCard = currentCard;
     currentCard = deck.drawCard();
-    if (currentCard === null){
-        theDiv.innerText = 'Deck empty'
-        return;
-    }
+    updateTexts();
+    saveDeck();
+}
 
+function updateTexts(){
     secondDiv.innerText = previousCard?.value ?? '';
-    theDiv.innerText = currentCard?.value ?? '';
+    if (currentCard === null) {
+        theDiv.innerText = 'Deck empty';
+    }
+    else{
+        theDiv.innerText = currentCard?.value ?? '';
+    }
+    blessCounter.innerText = deck.countBlesses();
+    curseCounter.innerText = deck.countCurses();
 
-    if (currentCard.triggerShuffle){
-        reminder.innerText = 'Deck should be reshuffled'
+    if (deck.shouldReshuffle) {
+        reminder.innerText = 'Deck should be reshuffled';
     }
 }
 
@@ -55,4 +64,9 @@ function reshuffle(){
     curseCounter.innerText = deck.countCurses();
     currentCard = null;
     previousCard = null;
+    saveDeck();
+}
+
+function saveDeck() {
+    localStorage.setItem('deck', JSON.stringify(deck));
 }

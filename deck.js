@@ -1,15 +1,23 @@
 import Card from './card.js';
 export default class Deck {
-    constructor() {
-        this.deck = [];
-        this.discardPile = [];
-        this.addCards('+0', 6);
-        this.addCards('+1', 5);
-        this.addCards('-1', 5);
-        this.addCards('+2', 1);
-        this.addCards('-2', 1);
-        this.addCards('x2', 1, true);
-        this.addCards('∅', 1, true);
+    constructor(savedDeck) {
+        if (savedDeck) {
+            this.deck = savedDeck.deck ?? [];
+            this.discardPile = savedDeck.discardPile ?? [];
+            this.shouldReshuffle = savedDeck.shouldReshuffle;
+        }
+        else{
+            this.deck = [];
+            this.discardPile = [];
+            this.addCards('+0', 6);
+            this.addCards('+1', 5);
+            this.addCards('-1', 5);
+            this.addCards('+2', 1);
+            this.addCards('-2', 1);
+            this.addCards('x2', 1, true);
+            this.addCards('∅', 1, true);
+            this.shouldReshuffle = false;
+        }
     }
 
 
@@ -19,7 +27,12 @@ export default class Deck {
         }
         const index = (Math.floor(Math.random() * this.deck.length));
 
-        return this.deck.splice(index, 1)[0];
+        const nextCard = this.deck.splice(index, 1)[0];
+        if (nextCard.triggerShuffle) {
+            this.shouldReshuffle = true;
+        }
+        this.discardPile.push(nextCard);
+        return nextCard;
     }
 
     reshuffleDeck() {
@@ -29,6 +42,7 @@ export default class Deck {
             }
         });
         this.discardPile = [];
+        this.shouldReshuffle = false;
     }
 
     addCard(value){
