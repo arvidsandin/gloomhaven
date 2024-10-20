@@ -13,15 +13,21 @@
 
 <body>
     <script type="module" src="index.js"></script>
-    <p></p>
-    <div id="theDiv" class="divs"></div>
-    <div id="secondDiv" class="divs"></div>
-    <button id="reshuffleButton">Reshuffle</button>
-    <button id="blessButton">Add bless card</button>
-    <button id="curseButton">Add curse card</button>
-    <p>Blesses: <span id="blessCounter">0</span></p>
-    <p>Curses: <span id="curseCounter">0</span></p>
-    <p id="reminder"></p>
+    <div id="cards">
+        <div id="mostRecentCard" class="card"></div>
+        <div id="secondMostRecentCard" class="card"></div>
+    </div>
+    <div id="bottomPart">
+        <div id="buttons">
+            <p id="blessButton" class="button"><img src="iconmonstr-copy-5-48.png" alt="double icon"><span id="blessCounter"/>0</span></p>
+            <p id="curseButton" class="button"><img src="iconmonstr-forbidden-1-48.png" alt="block icon" class="mirror"/><span id="curseCounter">0</span></p>
+            <p id="reshuffleButton" class="button">
+                <img src="iconmonstr-synchronization-19-48.png" alt="reminder icon"/>
+                <img id="reminderIcon" src="iconmonstr-circle-filled-16.png" alt="reminder icon" class="inactive"/>
+            </p>
+        </div>
+        <p id="reminder"></p>
+    </div>
 </body>
 
 </html>

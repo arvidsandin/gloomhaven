@@ -8,9 +8,9 @@ let reminder;
 let blessCounter;
 let curseCounter;
 addEventListener("DOMContentLoaded", (event) => {
-    theDiv = document.getElementById('theDiv');
-    secondDiv = document.getElementById('secondDiv');
-    reminder = document.getElementById('reminder');
+    theDiv = document.getElementById('mostRecentCard');
+    secondDiv = document.getElementById('secondMostRecentCard');
+    reminder = document.getElementById('reminderIcon');
     blessCounter = document.getElementById('blessCounter');
     curseCounter = document.getElementById('curseCounter');
     theDiv.addEventListener("click", e => {
@@ -51,7 +51,7 @@ function updateTexts(){
     curseCounter.innerText = deck.countCurses();
 
     if (deck.shouldReshuffle) {
-        reminder.innerText = 'Deck should be reshuffled';
+        reminder.classList.remove('inactive');
     }
 }
 
@@ -59,7 +59,7 @@ function reshuffle(){
     deck.reshuffleDeck();
     secondDiv.innerText = '';
     theDiv.innerText = '';
-    reminder.innerText = '';
+    reminder.classList.add('inactive');
     blessCounter.innerText = deck.countBlesses();
     curseCounter.innerText = deck.countCurses();
     currentCard = null;

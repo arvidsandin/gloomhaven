@@ -1,14 +1,73 @@
-.divs{
-    height: 100px;
-    width: 100px;
+body{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    font: 24px 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+#cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    max-height: calc(90vh - 64px);
+    width: 90%;
+    gap: 10px;
+    padding: 5%;
+}
+
+.card{
+    height: calc(50% - 20px);
+    width: 100%;
     border: 1px solid black;
     user-select: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px 0;
 }
 
-.divs:hover{
+.card:hover{
     cursor: pointer;
+}
+
+#bottomPart{
+    display: flex;
+    justify-content: center;
+    align-items:baseline;height: 64px;
+    width: 90%;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5%;
+}
+#buttons{
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+.button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 50%;
+    img{
+        margin: 5px;
+    }
+}
+
+#reminderIcon{
+    margin-bottom: 36px;
+    margin-left: -10px;
+}
+
+.inactive{
+    visibility: hidden;
+}
+
+.mirror{
+    transform: scaleX(-1);
 }
