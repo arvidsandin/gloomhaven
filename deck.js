@@ -1,7 +1,8 @@
 import Card from './card.js';
 export default class Deck {
+    version = 1;
     constructor(savedDeck) {
-        if (savedDeck) {
+        if (savedDeck && savedDeck.version >= this.version) {
             this.deck = savedDeck.deck ?? [];
             this.discardPile = savedDeck.discardPile ?? [];
             this.shouldReshuffle = savedDeck.shouldReshuffle;
@@ -9,13 +10,13 @@ export default class Deck {
         else{
             this.deck = [];
             this.discardPile = [];
-            this.addCards('+0', 6);
-            this.addCards('+1', 5);
-            this.addCards('-1', 5);
-            this.addCards('+2', 1);
-            this.addCards('-2', 1);
-            this.addCards('x2', 1, true);
-            this.addCards('∅', 1, true);
+            this.addCards('+0', './GH_0.png', 6);
+            this.addCards('+1', './GH_+1.png', 5);
+            this.addCards('-1', './GH_-1.png', 5);
+            this.addCards('+2', './GH_+2.png', 1);
+            this.addCards('-2', './GH_-2.png', 1);
+            this.addCards('x2', './GH_x2.png', 1, true);
+            this.addCards('∅', './GH_Null.png', 1, true);
             this.shouldReshuffle = false;
         }
     }
@@ -45,13 +46,13 @@ export default class Deck {
         this.shouldReshuffle = false;
     }
 
-    addCard(value){
-        this.deck.push(new Card(value, false, false));
+    addCard(value, imgSrc){
+        this.deck.push(new Card(value, imgSrc, false, false));
     }
 
-    addCards(value, amount, triggerShuffle = false){
+    addCards(value, imgSrc,  amount, triggerShuffle = false){
         for (let index = 0; index < amount; index++) {
-            this.deck.push(new Card(value, triggerShuffle, true));
+            this.deck.push(new Card(value, imgSrc, triggerShuffle, true));
         }
     }
 
