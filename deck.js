@@ -1,6 +1,6 @@
 import Card from './card.js';
 export default class Deck {
-    version = 1;
+    version = 2;
     constructor(savedDeck) {
         if (savedDeck && savedDeck.version >= this.version) {
             this.deck = savedDeck.deck ?? [];
